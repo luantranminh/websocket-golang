@@ -25,6 +25,7 @@
     </div>
 
     <script>
+        i = 0;
         window.onload = function() {
 
             // Get references to elements on the page.
@@ -36,7 +37,6 @@
 
             // Create a new WebSocket.
             var socket = new WebSocket("ws://" + document.location.host + "/ws");
-
             // Handle any errors that occur.
             socket.onerror = function(error) {
                 console.log('WebSocket Error: ' + error);
@@ -61,24 +61,40 @@
             };
 
             // Send a message when the form is submitted.
-            form.onsubmit = function(e) {
-                e.preventDefault();
+            // form.onsubmit = function(e) {
+            //     e.preventDefault();
 
-                // Retrieve the message from the textarea.
-                var message = messageField.value;
+            //     // Retrieve the message from the textarea.
+            //     var message = messageField.value;
 
-                // Send the message through the WebSocket.
-                JSONMessage = `{"content":"` + message + `"}`
-                console.log(JSONMessage)
-                socket.send(JSON.stringify(JSON.parse(JSONMessage)));
-                // Add the message to the messages list.
-                messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message + '</li>';
+            //     // Send the message through the WebSocket.
+            //     JSONMessage = `{"content":"` + message + `"}`
+            //     console.log(JSONMessage)
+            //     socket.send(JSON.stringify(JSON.parse(JSONMessage)));
+            //     // Add the message to the messages list.
+            //     messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message + '</li>';
 
-                // Clear out the message field.
-                messageField.value = '';
+            //     // Clear out the message field.
+            //     messageField.value = '';
 
-                return false;
-            };
+            //     return false;
+            // };
+
+
+            // setInterval(updateLocation, 1000)
+
+            // function updateLocation() {
+                
+            //     i++;
+            //     JSONMessage = `{
+            //         "group_id": "2f9b7c0a-1c03-4759-91dd-cbbb24c047fb",
+            //         "lat":` + i + `,
+            //         "lng": 2,
+            //         "user_id": "ad8d820c-39e2-47ca-aece-fefa8a25faf6"
+            //     }`
+            //     socket.send(JSON.stringify(JSON.parse(JSONMessage)));
+            // }
+
 
             // Close the WebSocket connection when the close button is clicked.
             closeBtn.onclick = function(e) {
